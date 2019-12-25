@@ -1,0 +1,43 @@
+﻿@*@model DealDouble.Entities.Auction*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Auction List</h2>
+
+<br />
+<form method="post">
+    <table>
+        <thead>
+            <tr>
+
+                <th>Title</th>
+                <th>PictureURL</th>
+                <th>Discription</th>
+                <th>ActualAmount</th>
+                <th>StartingTime</th>
+                <th>EndingTime</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var auction in Model)
+            {
+            <tr>
+                <td><input type="hidden" name="AuctionID" value="@auction.AuctionID" /></td>
+                <td>@auction.Title</td>
+                <td>@auction.PictureURL</td>
+                <td>@auction.Discription</td>
+                <td>@auction.ActualAmount</td>
+                <td>@auction.StartingTime</td>
+                <td>@auction.EndingTime</td>
+                <td><a href="/Auctions/Delete/@auction.AuctionID">Delete</a>&nbsp;&nbsp;<a href="/Auctions/Edit/@auction.AuctionID">Edit</a></td>
+            </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+</form>

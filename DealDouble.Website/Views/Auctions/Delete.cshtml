@@ -1,0 +1,14 @@
+﻿@model DealDouble.Entities.Auction
+
+
+<h2>Delete</h2>
+
+<h1>Are You Sure You Want To Delete This Auction.??</h1>
+<form method="post">
+    <input type="hidden" name="AuctionID"  value="@Model.AuctionID" />
+    <button value="">Yes</button>
+</form>
+
+<form action="/Auctions/Index" method="get">
+    <button>No</button>
+</form>

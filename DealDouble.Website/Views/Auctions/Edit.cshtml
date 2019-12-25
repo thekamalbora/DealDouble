@@ -1,0 +1,45 @@
+﻿@model DealDouble.Entities.Auction
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>
+    Edit Auction
+</h2>
+<br />
+<form method="post">
+    <table>
+        <tr>
+            <td></td>
+            <td><input type="hidden" name="AuctionID" value="@Model.AuctionID" /></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input type="text" name="Title" value="@Model.Title" /></td>
+        </tr>
+        <tr>
+            <td>Picture URL</td>
+            <td><input type="text" name="PictureURL" value="@Model.PictureURL" /></td>
+        </tr>
+        <tr>
+            <td>Discription</td>
+            <td><input type="text" name="Discription" value="@Model.Discription" /></td>
+        </tr>
+        <tr>
+            <td>Actual Amount</td>
+            <td><input type="text" name="ActualAmount" value="@Model.ActualAmount" /></td>
+        </tr>
+        <tr>
+            <td>Starting Time</td>
+            <td><input type="text" name="StartingTime" value="@Model.StartingTime" /></td>
+        </tr>
+        <tr>
+            <td>Ending Time</td>
+            <td><input type="text" name="EndingTime" value="@Model.EndingTime" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td> <button>Save</button></td>
+        </tr>
+    </table>
+</form>
