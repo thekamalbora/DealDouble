@@ -4,10 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>All Auction List</h2>
 
-<br />
-<form method="post">
+
+
+<div id="AuctionList">
+    <h2>All Auction List</h2>
+
+    <br />
     <table>
         <thead>
             <tr>
@@ -24,20 +27,82 @@
         <tbody>
             @foreach (var auction in Model)
             {
-            <tr>
-                <td><input type="hidden" name="AuctionID" value="@auction.AuctionID" /></td>
-                <td>@auction.Title</td>
-                <td>@auction.PictureURL</td>
-                <td>@auction.Discription</td>
-                <td>@auction.ActualAmount</td>
-                <td>@auction.StartingTime</td>
-                <td>@auction.EndingTime</td>
-                <td><a href="/Auctions/Delete/@auction.AuctionID">Delete</a>&nbsp;&nbsp;<a href="/Auctions/Edit/@auction.AuctionID">Edit</a></td>
-            </tr>
+                <tr>
+                    <td><input type="hidden" name="AuctionID" value="@auction.AuctionID" /></td>
+                    <td>@auction.Title</td>
+                    <td>@auction.PictureURL</td>
+                    <td>@auction.Discription</td>
+                    <td>@auction.ActualAmount</td>
+                    <td>@auction.StartingTime</td>
+                    <td>@auction.EndingTime</td>
+                    <td>
+                        <button data-id="@auction.AuctionID"  class="BtnEditAuction">Edit</button>
+                        <button data-id="@auction.AuctionID"  class="BtnDeleteAuction">Delete</button>
+                    </td>
+                </tr>
 
             }
 
         </tbody>
 
     </table>
-</form>
+
+    <div>
+        <button id="BtnCreateNewAuction">Create New Auctions</button>
+    </div>
+    <div id="ContentArea">
+
+    </div>
+
+
+    <script>
+        $("#BtnCreateNewAuction").click(function () {
+            $.ajax({
+                url: "/Auctions/Create/",
+                method: 'get'
+            }).done(function (response) {
+
+                $("#ContentArea").html(response);
+            });
+        });
+
+        $(".BtnEditAuction").click(function () {
+                
+            $.ajax({
+
+                url: "/Auctions/Edit/",
+                method: 'get',
+                data: { ID: $(this).attr("data-id") }
+            }).done(function (response) {
+
+                $("#ContentArea").html(response);
+            });
+        });
+
+        $(".BtnDeleteAuction").click(function () {
+              debugger;
+            var ID = $(this).attr("data-id");
+            var url = "/Auctions/Delete/" + ID;
+            var Result = confirm("Are You Sure.!!");
+          
+            if (Result == true)
+            {
+                $.ajax
+                    ({
+                        url: url,
+                        method: "post",
+                      
+                    }).done(function (response) {
+                        debugger;
+                        $("#AuctionList").html(response);
+                    }).fail(function () {
+                        alert("faild");
+                    });
+            }
+
+        });
+    </script>
+</div>
+
+
+

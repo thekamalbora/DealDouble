@@ -7,7 +7,7 @@
     Edit Auction
 </h2>
 <br />
-<form method="post">
+<form id="editAuction" method="post">
     <table>
         <tr>
             <td></td>
@@ -39,7 +39,24 @@
         </tr>
         <tr>
             <td></td>
-            <td> <button>Save</button></td>
+            <td> <button id="btnEditBtn" type="button">Save</button></td>
         </tr>
     </table>
 </form>
+
+
+<script>
+    $("#btnEditBtn").click(function () {
+        $.ajax
+            ({
+                url:"Edit",
+                method: "Post",
+                data: $("#editAuction").serialize()
+            }).done(function (response) {
+                debugger;
+                $("#AuctionList").html(response);
+            }).fail(function () {
+
+            });
+    });
+</script>

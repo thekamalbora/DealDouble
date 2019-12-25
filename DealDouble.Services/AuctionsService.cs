@@ -19,7 +19,7 @@ namespace DealDouble.Services
 
         public List<Auction> GetAllAuction()
         {
-            return context.Auctions.ToList();//Find Id In DataBase
+            return context.Auctions.ToList();
         }
 
         public Auction GetAuctionByID(int AuctionID)
@@ -32,11 +32,14 @@ namespace DealDouble.Services
             context.Entry(ObjAuction).State = System.Data.Entity.EntityState.Modified;//update Data In Database
             context.SaveChanges(); //Save Data In Data Base
         }
-        public void DeleteAuction(Auction ObjAuction)
+        public void DeleteAuction(int ID)
         {
-          /*  context.Auctions.Remove(ObjAuction);*///delete Data In Database
-            context.Entry(ObjAuction).State = System.Data.Entity.EntityState.Deleted;
-            context.SaveChanges(); //Save Data In Data Base
+            Auction ObjAuction = context.Auctions.Find(ID);
+            context.Auctions.Remove(ObjAuction);
+            context.SaveChanges();
+          ///*  context.Auctions.Remove(ObjAuction);*///delete Data In Database
+          //  context.Entry(ObjAuction).State = System.Data.Entity.EntityState.Deleted;
+          //  context.SaveChanges(); //Save Data In Data Base
        
         }
 

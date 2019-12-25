@@ -17,26 +17,34 @@ namespace DealDouble.Website.Controllers
         public ActionResult Index()
         {
            var auction= ObjAuctionServices.GetAllAuction();
-            return View(auction);
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView(auction);
+            }
+            else
+            {
+                return View(auction);
+            }
+        
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
         public ActionResult Create(Auction ObjAuction)
         {
             ObjAuctionServices.SaveAuction(ObjAuction);
-            return View();
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public ActionResult Edit(int ID)
         {
             var auction = ObjAuctionServices.GetAuctionByID(ID);
-            return View(auction);
+            return PartialView(auction);
         }
 
         [HttpPost]
@@ -46,17 +54,10 @@ namespace DealDouble.Website.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult Delete(int ID)
         {
-            var auction = ObjAuctionServices.GetAuctionByID(ID);
-            return View(auction);
-        }
-
-        [HttpPost]
-        public ActionResult Delete(Auction ObjAuction)
-        {
-            ObjAuctionServices.DeleteAuction(ObjAuction);
+            ObjAuctionServices.DeleteAuction(ID);
             return RedirectToAction("Index");
         }
     }

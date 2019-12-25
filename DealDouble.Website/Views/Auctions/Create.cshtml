@@ -6,7 +6,7 @@
     Create Auction
 </h2>
 <br />
-<form method="post">
+<form method="post" id="FormCreateAuction" action="/Auctions/Create/">
     <table>
         <tr>
             <td>Title</td>
@@ -34,7 +34,23 @@
         </tr>
         <tr>
             <td></td>
-            <td> <button>Save</button></td>
+            <td> <button type="button" id="btnSaveAuction">Save</button></td>
         </tr>
     </table>
 </form>
+
+<script>
+    $("#btnSaveAuction").click(function () {
+        $.ajax
+            ({
+                url:"Create",
+                method: "Post",
+                data: $("#FormCreateAuction").serialize()
+            }).done(function (response) {
+                debugger;
+                $("#AuctionList").html(response);
+            }).fail(function () {
+
+            });
+    });
+</script>
